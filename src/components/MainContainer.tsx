@@ -4,6 +4,7 @@ import Career from "./Career";
 import Contact from "./Contact";
 import Decks from "./Decks";
 import Landing from "./Landing";
+import Media from "./Media";
 import Navbar from "./Navbar";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
@@ -33,6 +34,7 @@ const MainContainer = () => {
       <WhatIDo />
       <Work />
       <Decks />
+      <Media />
       <Career />
       <Contact />
     </div>
