@@ -86,9 +86,25 @@
   }
   .header {
     justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.5rem 0.8rem;
+  }
+  .header nav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    max-width: calc(100vw - 75px);
+  }
+  .header nav::-webkit-scrollbar {
+    display: none;
+  }
+  .header nav ul {
+    gap: 0.2rem;
+    flex-wrap: nowrap;
   }
   .header nav a {
-    padding: 0.35rem 0.5rem;
-    font-size: 0.7rem;
+    padding: 0.35rem 0.45rem;
+    font-size: 0.72rem;
+    white-space: nowrap;
   }
 }
