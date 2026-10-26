@@ -11,9 +11,10 @@ type Project = {
   category: string;
   tools: string;
   image: string;
-  /** where the poster click goes; falls back to doc, then live */
+  /** where the poster click goes; falls back to actions, doc, then live */
   doc?: { label: string; href: string };
   live?: { label: string; href: string };
+  actions?: { label: string; href: string; isAlt?: boolean }[];
   focus?: string;
   art?: "events";
 };
@@ -25,25 +26,34 @@ const projects: Project[] = [
     tools:
       "Seeding a curated health-tech network: one bucket, one trust level, one channel at a time. Strategy for the first 100 members, built on THC's 5,000+ member ecosystem.",
     image: base + "images/work/orbyt.jpg",
-    doc: { label: "Read the strategy deck", href: base + "docs/Orbyt_Growth_Strategy.pdf" },
+    doc: { label: "Read Strategy Deck (PDF)", href: base + "docs/Orbyt_Growth_Strategy.pdf" },
   },
   {
     title: "IIMBx AI Systems & Dashboards",
     category: "Dashboards, Agents & Pipelines",
     tools:
-      "CEO dashboard across SWAYAM & BBA DBE, Freedcamp PM dashboard with Gemini assistant, autonomous Website Agent scored by Lighthouse CLI, Groq + Whisper translation pipeline.",
+      "Interactive executive dashboards & AI agents: Freedcamp PM Dashboard with Gemini assistant, CEO real-time monitoring across SWAYAM & BBA DBE, Course Suggestion Engine, and Website Auditor.",
     image: base + "images/work/iimbx.jpg",
-    doc: { label: "Read PM Dashboard Report", href: base + "docs/IIMBx_PM_Dashboard_Report.pdf" },
+    actions: [
+      { label: "PM Dashboard (Demo)", href: base + "demos/pm-dashboard/" },
+      { label: "CEO Dashboard (Demo)", href: base + "demos/ceo-dashboard/", isAlt: true },
+      { label: "Course Intelligence (Demo)", href: base + "demos/suggestion-engine/", isAlt: true },
+      { label: "Website Auditor (Demo)", href: base + "demos/website-auditor/dashboard/index.html", isAlt: true },
+      { label: "PM Report (PDF)", href: base + "docs/IIMBx_PM_Dashboard_Report.pdf", isAlt: true },
+    ],
     focus: "50% 55%",
   },
   {
-    title: "Wandr",
+    title: "Wandr (DDT Capstone)",
     category: "Group Travel Discovery · DDT Capstone",
     tools:
       "Group-quiz preference-matching algorithm, destination safety scoring. Hidden places, found together.",
     image: base + "images/work/wandr.jpg",
-    doc: { label: "View the pitch deck", href: base + "docs/Wandr_Pitch_Deck.pdf" },
-    live: { label: "Open live site", href: "https://harshmakhija24.github.io/DDT-PROJECT-" },
+    actions: [
+      { label: "Open Live App (DDT)", href: "https://harshmakhija24.github.io/DDT-PROJECT-/" },
+      { label: "Strategy Report (PDF)", href: base + "presentations/wandr-strategy-report.pdf", isAlt: true },
+      { label: "Pitch Deck (PDF)", href: base + "docs/Wandr_Pitch_Deck.pdf", isAlt: true },
+    ],
   },
   {
     title: "Krishitek Digital Platform",
@@ -51,7 +61,7 @@ const projects: Project[] = [
     tools:
       "Serverless AI sales agent (Groq Llama 3), multilingual translation engine, zero-code CMS, Supabase RBAC. Replaced a vulnerable legacy WordPress site.",
     image: base + "images/work/krishitek.jpg",
-    live: { label: "Open live site", href: "https://krishitek-website.vercel.app" },
+    live: { label: "Open Live Site", href: "https://krishitek-website.vercel.app" },
     focus: "50% 0%",
   },
   {
@@ -60,7 +70,7 @@ const projects: Project[] = [
     tools:
       "Adaptive founder acceleration platform: personalized curriculum pathways, interactive venture sprints, and automated competency benchmarking.",
     image: base + "images/work/vibeforge.jpg",
-    doc: { label: "View the pitch deck", href: base + "docs/VibeForge_Academy_Pitch.pdf" },
+    doc: { label: "View Pitch Deck (PDF)", href: base + "docs/VibeForge_Academy_Pitch.pdf" },
   },
   {
     title: "Last Life",
@@ -82,9 +92,12 @@ const projects: Project[] = [
     title: "e-START · Hiroshima University",
     category: "Disaster Resilience & Community Health",
     tools:
-      "Agile COIL e-START cohort across 10 Asia-Pacific and European universities.",
+      "Agile COIL e-START cohort across 10 Asia-Pacific and European universities. Cross-border comparative analysis and community resilience frameworks.",
     image: base + "images/work/estart.jpg",
-    doc: { label: "View my intro deck", href: base + "docs/eSTART_Intro_Deck.pdf" },
+    actions: [
+      { label: "Disaster Resilience (PDF)", href: base + "presentations/disaster-response-resilience.pdf" },
+      { label: "Personal Intro Deck (PDF)", href: base + "presentations/harsh-makhija-intro.pdf", isAlt: true },
+    ],
   },
   {
     title: "Aham Aatm Deepah Association",
@@ -175,29 +188,48 @@ const Work = () => {
                         <span className="tools-label">Tools &amp; Features</span>
                         <p>{project.tools}</p>
                       </div>
-                      {(project.doc || project.live) && (
+                      {(project.actions || project.doc || project.live) && (
                         <div className="carousel-actions">
-                          {project.doc && (
-                            <a
-                              className="btn btn-sm"
-                              href={project.doc.href}
-                              target="_blank"
-                              rel="noreferrer"
-                              tabIndex={index === currentIndex ? 0 : -1}
-                            >
-                              {project.doc.label} ↗
-                            </a>
-                          )}
-                          {project.live && (
-                            <a
-                              className="btn btn-sm btn-alt"
-                              href={project.live.href}
-                              target="_blank"
-                              rel="noreferrer"
-                              tabIndex={index === currentIndex ? 0 : -1}
-                            >
-                              {project.live.label} ↗
-                            </a>
+                          {project.actions ? (
+                            project.actions.map((act) => (
+                              <a
+                                key={act.label}
+                                className={`btn btn-sm ${
+                                  act.isAlt ? "btn-alt" : ""
+                                }`}
+                                href={act.href}
+                                target="_blank"
+                                rel="noreferrer"
+                                tabIndex={index === currentIndex ? 0 : -1}
+                              >
+                                {act.label} ↗
+                              </a>
+                            ))
+                          ) : (
+                            <>
+                              {project.doc && (
+                                <a
+                                  className="btn btn-sm"
+                                  href={project.doc.href}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  tabIndex={index === currentIndex ? 0 : -1}
+                                >
+                                  {project.doc.label} ↗
+                                </a>
+                              )}
+                              {project.live && (
+                                <a
+                                  className="btn btn-sm btn-alt"
+                                  href={project.live.href}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  tabIndex={index === currentIndex ? 0 : -1}
+                                >
+                                  {project.live.label} ↗
+                                </a>
+                              )}
+                            </>
                           )}
                         </div>
                       )}
@@ -206,9 +238,15 @@ const Work = () => {
                       <WorkImage
                         image={project.image}
                         alt={project.title}
-                        link={project.doc?.href ?? project.live?.href}
+                        link={
+                          project.actions?.[0]?.href ??
+                          project.doc?.href ??
+                          project.live?.href
+                        }
                         focus={project.focus}
-                        art={project.art === "events" ? <EventsArt /> : undefined}
+                        art={
+                          project.art === "events" ? <EventsArt /> : undefined
+                        }
                       />
                     </div>
                   </div>

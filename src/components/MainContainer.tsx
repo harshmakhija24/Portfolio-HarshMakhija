@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import About from "./About";
 import Career from "./Career";
 import Contact from "./Contact";
+import Decks from "./Decks";
 import Landing from "./Landing";
 import Navbar from "./Navbar";
 import WhatIDo from "./WhatIDo";
@@ -30,8 +31,9 @@ const MainContainer = () => {
       <Landing />
       <About />
       <WhatIDo />
-      <Career />
       <Work />
+      <Decks />
+      <Career />
       <Contact />
     </div>
   );

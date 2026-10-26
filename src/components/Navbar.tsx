@@ -30,6 +30,12 @@ const Navbar = () => (
           <a href="#work">WORK</a>
         </li>
         <li>
+          <a href="#decks">DECKS</a>
+        </li>
+        <li>
+          <a href="#career">CAREER</a>
+        </li>
+        <li>
           <a href="#contact">CONTACT</a>
         </li>
         <li>
