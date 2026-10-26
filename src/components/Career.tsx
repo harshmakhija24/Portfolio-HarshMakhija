@@ -4,8 +4,8 @@ const base = import.meta.env.BASE_URL;
 
 /** Logos live in public/images/logos/. A missing file just hides itself. */
 const logoFor: Record<string, string> = {
-  "The Healthtech Collective": "thc.png",
-  "Policy, Politics": "ppgf.png",
+  "The Healthtech Collective": "thc.svg",
+  "Policy, Politics": "ppgf.svg",
   "IIMBx": "iimbx.png",
   "Indian Institute of Management Bangalore": "iimb.png",
   "IIM Bangalore": "iimb.png",

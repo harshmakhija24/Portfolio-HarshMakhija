@@ -1,0 +1,10 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 160" role="img" aria-label="The Health Tech Collective">
+  <rect width="320" height="160" fill="#fff"/>
+  <rect x="0" y="0" width="12" height="160" fill="#1d4ed8"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#0b2a6b">
+    <text x="36" y="46" font-size="30" font-weight="800">THE</text>
+    <text x="36" y="80" font-size="30" font-weight="800">HEALTH</text>
+    <text x="36" y="114" font-size="30" font-weight="300">TECH</text>
+    <text x="36" y="148" font-size="30" font-weight="800">COLLECTIVE</text>
+  </g>
+</svg>

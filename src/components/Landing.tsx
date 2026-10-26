@@ -7,8 +7,8 @@ const base = import.meta.env.BASE_URL;
 const orgs = [
   { name: "IIM Bangalore", short: "IIMB", role: "BBA, Digital Business & Entrepreneurship", file: "iimb.png" },
   { name: "IIMBx", short: "IIMBx", role: "Tech & AI Systems Intern", file: "iimbx.png" },
-  { name: "The Health Tech Collective", short: "THC", role: "Growth & Founder’s Office", file: "thc.png" },
-  { name: "PPGF", short: "PPGF", role: "Strategic Policy Intern", file: "ppgf.png" },
+  { name: "The Health Tech Collective", short: "THC", role: "Growth & Founder’s Office", file: "thc.svg" },
+  { name: "PPGF", short: "PPGF", role: "Strategic Policy Intern", file: "ppgf.svg" },
   { name: "Aham Aatm Deepah", short: "AAD", role: "Non-Executive Director", file: "aham-aatm-deepah.svg" },
 ];
 
