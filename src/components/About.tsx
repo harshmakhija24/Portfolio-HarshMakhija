@@ -23,6 +23,14 @@ const About = () => (
           systems—automating pipelines, shipping digital platforms, and eliminating
           operational bottlenecks to drive real commercial and community growth.
         </p>
+        <div className="about-photos" data-reveal>
+          <figure className="about-photo p1">
+            <img src={import.meta.env.BASE_URL + "images/about-1.jpg"} alt="Harsh smiling, arms crossed" loading="lazy" />
+          </figure>
+          <figure className="about-photo p2">
+            <img src={import.meta.env.BASE_URL + "images/about-2.jpg"} alt="Harsh smiling against a sandstone wall" loading="lazy" />
+          </figure>
+        </div>
       </div>
       <div className="about-stats">
         <p className="stat-line" data-reveal>
