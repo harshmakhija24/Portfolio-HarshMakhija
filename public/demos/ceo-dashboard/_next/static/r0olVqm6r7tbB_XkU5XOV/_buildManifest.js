@@ -3,8 +3,8 @@ self.__BUILD_MANIFEST = {
     "afterFiles": [],
     "beforeFiles": [
       {
-        "source": "/3d-resume-/demos/ceo-dashboard//_next/:path+",
-        "destination": "/3d-resume-/demos/ceo-dashboard/_next/:path+"
+        "source": "/demos/ceo-dashboard//_next/:path+",
+        "destination": "/demos/ceo-dashboard/_next/:path+"
       }
     ],
     "fallback": []

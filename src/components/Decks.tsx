@@ -163,21 +163,20 @@ const Decks = () => (
                 <span className="mono">Live document preview</span>
                 <span className="mono preview-badge">{d.pageLabel}</span>
               </div>
+              <div className="preview-frame">
+                <iframe
+                  title={`${d.title} — scrollable preview`}
+                  src={`${d.pdfSrc}#view=FitH&toolbar=0&navpanes=0`}
+                  loading="lazy"
+                />
+              </div>
               <a
-                className="preview-frame"
+                className="preview-fallback mono"
                 href={d.pdfSrc}
                 target="_blank"
                 rel="noreferrer"
-                aria-label={`Open ${d.title} full document`}
               >
-                <img
-                  src={d.coverImage}
-                  alt={`${d.title} preview cover`}
-                  loading="lazy"
-                />
-                <span className="preview-overlay">
-                  <span>View Document ↗</span>
-                </span>
+                Preview not loading? Open the full PDF ↗
               </a>
             </div>
           </article>
