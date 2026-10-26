@@ -3,6 +3,7 @@ import "./styles/Work.css";
 import WorkImage from "./WorkImage";
 import EventsArt from "./EventsArt";
 import DashCollage from "./DashCollage";
+import LastLifeArt from "./LastLifeArt";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const base = import.meta.env.BASE_URL;
@@ -17,7 +18,7 @@ type Project = {
   live?: { label: string; href: string };
   actions?: { label: string; href: string; isAlt?: boolean }[];
   focus?: string;
-  art?: "events" | "dash";
+  art?: "events" | "dash" | "lastlife";
 };
 
 const projects: Project[] = [
@@ -79,7 +80,7 @@ const projects: Project[] = [
     tools:
       "0-to-1 platform launch, organic viral growth, tournament monetization. Scaled to 12,000+ active users in 45 days.",
     image: base + "images/work/lastlife.jpg",
-    focus: "50% 40%",
+    art: "lastlife",
   },
   {
     title: "₹12 Crore Events Portfolio",
@@ -246,7 +247,7 @@ const Work = () => {
                         }
                         focus={project.focus}
                         art={
-                          project.art === "events" ? <EventsArt /> : project.art === "dash" ? <DashCollage /> : undefined
+                          project.art === "events" ? <EventsArt /> : project.art === "dash" ? <DashCollage /> : project.art === "lastlife" ? <LastLifeArt /> : undefined
                         }
                       />
                     </div>
