@@ -94,11 +94,12 @@ const projects: Project[] = [
     title: "e-START · Hiroshima University",
     category: "Disaster Resilience & Community Health",
     tools:
-      "Agile COIL e-START cohort across 10 Asia-Pacific and European universities. Cross-border comparative analysis and community resilience frameworks.",
+      "Agile COIL e-START cohort across 10 Asia-Pacific and European universities. Cross-border comparative analysis and community resilience frameworks. Completed the 30-hour COIL Collaborative Learning Foundation Course and earned a verified Open Badge.",
     image: base + "images/work/estart.jpg",
     actions: [
       { label: "Disaster Resilience (PDF)", href: base + "presentations/disaster-response-resilience.pdf" },
       { label: "Personal Intro Deck (PDF)", href: base + "presentations/harsh-makhija-intro.pdf", isAlt: true },
+      { label: "Open Badge (Credential)", href: "https://openbadges.certcvs.ntt-west.co.jp/badge/7F1B50AA-597E-40B9-8EA7-1E2CB010C707/", isAlt: true },
     ],
   },
   {

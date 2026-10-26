@@ -79,7 +79,7 @@ const careerTimeline = [
     company: "Hiroshima University, Japan",
     duration: "2024 – 2025",
     description:
-      "Selected by IIM Bangalore for an international cohort across 10 Asia-Pacific & European universities, collaborating on disaster resilience frameworks and community public health models.",
+      "Selected by IIM Bangalore for an international cohort across 10 Asia-Pacific & European universities, collaborating on disaster resilience frameworks and community public health models. Earned a verified Open Badge for the 30-hour COIL Collaborative Learning Foundation Course (MEXT-backed Agile Entrepreneurship programme).",
     themeClass: "accent-business",
   },
   {
