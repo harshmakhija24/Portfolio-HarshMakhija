@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./styles/Work.css";
 import WorkImage from "./WorkImage";
 import EventsArt from "./EventsArt";
+import DashCollage from "./DashCollage";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const base = import.meta.env.BASE_URL;
@@ -16,7 +17,7 @@ type Project = {
   live?: { label: string; href: string };
   actions?: { label: string; href: string; isAlt?: boolean }[];
   focus?: string;
-  art?: "events";
+  art?: "events" | "dash";
 };
 
 const projects: Project[] = [
@@ -41,7 +42,7 @@ const projects: Project[] = [
       { label: "Website Auditor (Demo)", href: base + "demos/website-auditor/dashboard/index.html", isAlt: true },
       { label: "PM Report (PDF)", href: base + "docs/IIMBx_PM_Dashboard_Report.pdf", isAlt: true },
     ],
-    focus: "50% 55%",
+    art: "dash",
   },
   {
     title: "Wandr (DDT Capstone)",
@@ -239,13 +240,13 @@ const Work = () => {
                         image={project.image}
                         alt={project.title}
                         link={
-                          project.actions?.[0]?.href ??
+                          project.art === "dash" ? undefined : project.actions?.[0]?.href ??
                           project.doc?.href ??
                           project.live?.href
                         }
                         focus={project.focus}
                         art={
-                          project.art === "events" ? <EventsArt /> : undefined
+                          project.art === "events" ? <EventsArt /> : project.art === "dash" ? <DashCollage /> : undefined
                         }
                       />
                     </div>
