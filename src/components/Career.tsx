@@ -8,6 +8,7 @@ const logoFor: Record<string, string> = {
   "Policy, Politics": "ppgf.png",
   "IIMBx": "iimbx.png",
   "Indian Institute of Management Bangalore": "iimb.png",
+  "IIM Bangalore": "iimb.png",
   "Aham Aatm Deepah": "aham-aatm-deepah.png",
   "NAEMD": "naemd.png",
 };
