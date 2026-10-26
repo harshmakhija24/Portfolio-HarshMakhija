@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import About from "./About";
 import Career from "./Career";
+import Certifications from "./Certifications";
 import Contact from "./Contact";
 import Decks from "./Decks";
 import Landing from "./Landing";
@@ -36,6 +37,7 @@ const MainContainer = () => {
       <Decks />
       <Media />
       <Career />
+      <Certifications />
       <Contact />
     </div>
   );
