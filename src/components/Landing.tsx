@@ -1,4 +1,38 @@
+import { useState } from "react";
 import "./styles/Landing.css";
+
+const base = import.meta.env.BASE_URL;
+
+/** Drop the real logo into public/images/logos/<file>; until then a text badge shows. */
+const orgs = [
+  { name: "IIM Bangalore", short: "IIMB", role: "BBA, Digital Business & Entrepreneurship", file: "iimb.png" },
+  { name: "IIMBx", short: "IIMBx", role: "Tech & AI Systems Intern", file: "iimbx.png" },
+  { name: "The Health Tech Collective", short: "THC", role: "Growth & Founder’s Office", file: "thc.png" },
+  { name: "PPGF", short: "PPGF", role: "Strategic Policy Intern", file: "ppgf.png" },
+  { name: "Aham Aatm Deepah", short: "AAD", role: "Non-Executive Director", file: "aham-aatm-deepah.png" },
+];
+
+const OrgChip = ({ o, i }: { o: (typeof orgs)[number]; i: number }) => {
+  const [failed, setFailed] = useState(false);
+  return (
+    <div className={`org-chip org-${i}`} tabIndex={0} aria-label={`${o.name}, ${o.role}`}>
+      {failed ? (
+        <span className="org-fallback">{o.short}</span>
+      ) : (
+        <img
+          src={`${base}images/logos/${o.file}`}
+          alt={o.name}
+          loading="lazy"
+          onError={() => setFailed(true)}
+        />
+      )}
+      <span className="org-tip">
+        <strong>{o.name}</strong>
+        {o.role}
+      </span>
+    </div>
+  );
+};
 
 const marquee = [
   "Founder's Office",
@@ -55,19 +89,19 @@ const Landing = () => (
         </div>
       </div>
 
-      <div className="landing-stats">
-        <div className="stat-item stat-a">
-          <span className="stat-value">12,000+</span>
-          <span className="stat-label">Users Scaled</span>
-        </div>
-        <div className="stat-item stat-b">
-          <span className="stat-value">₹12Cr+</span>
-          <span className="stat-label">Events Managed</span>
-        </div>
-        <div className="stat-item stat-c">
-          <span className="stat-value">1,000+</span>
-          <span className="stat-label">Talent Evaluated</span>
-        </div>
+      <div className="hero-cluster">
+        <figure className="hero-polaroid">
+          <img
+            src={base + "images/harsh.jpg"}
+            alt="Harsh Makhija"
+            width={240}
+            height={240}
+          />
+          <figcaption>Harsh Makhija</figcaption>
+        </figure>
+        {orgs.map((o, i) => (
+          <OrgChip key={o.name} o={o} i={i} />
+        ))}
       </div>
     </div>
 
