@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" role="img" aria-label="Aham Aatm Deepah">
+  <rect width="320" height="120" fill="#fff"/>
+  <!-- diya lamp -->
+  <g transform="translate(14 16)">
+    <path d="M44 6c8 10 12 17 12 25a12 12 0 0 1-24 0c0-8 4-15 12-25z" fill="#f59e0b"/>
+    <path d="M44 18c4 5 6 9 6 13a6 6 0 0 1-12 0c0-4 2-8 6-13z" fill="#fde68a"/>
+    <path d="M6 52h76c0 14-14 26-38 26S6 66 6 52z" fill="#b45309"/>
+    <rect x="30" y="80" width="28" height="6" rx="3" fill="#78350f"/>
+  </g>
+  <text x="112" y="52" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="30" fill="#78350f">Aham Aatm</text>
+  <text x="112" y="86" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="30" fill="#b45309">Deepah</text>
+</svg>

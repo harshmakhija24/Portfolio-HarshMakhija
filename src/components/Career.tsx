@@ -9,7 +9,7 @@ const logoFor: Record<string, string> = {
   "IIMBx": "iimbx.png",
   "Indian Institute of Management Bangalore": "iimb.png",
   "IIM Bangalore": "iimb.png",
-  "Aham Aatm Deepah": "aham-aatm-deepah.png",
+  "Aham Aatm Deepah": "aham-aatm-deepah.svg",
   "NAEMD": "naemd.png",
 };
 const logoSrc = (company: string) => {
