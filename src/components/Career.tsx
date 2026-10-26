@@ -1,5 +1,21 @@
 import "./styles/Career.css";
 
+const base = import.meta.env.BASE_URL;
+
+/** Logos live in public/images/logos/. A missing file just hides itself. */
+const logoFor: Record<string, string> = {
+  "The Healthtech Collective": "thc.png",
+  "Policy, Politics": "ppgf.png",
+  "IIMBx": "iimbx.png",
+  "Indian Institute of Management Bangalore": "iimb.png",
+  "Aham Aatm Deepah": "aham-aatm-deepah.png",
+  "NAEMD": "naemd.png",
+};
+const logoSrc = (company: string) => {
+  const key = Object.keys(logoFor).find((k) => company.includes(k));
+  return key ? `${base}images/logos/${logoFor[key]}` : null;
+};
+
 const careerTimeline = [
   {
     title: "Growth & Founder’s Office Associate",
@@ -124,6 +140,15 @@ const Career = () => (
             data-reveal
           >
             <span className="career-node-duration">{item.duration}</span>
+            {logoSrc(item.company) && (
+              <img
+                className="career-logo"
+                src={logoSrc(item.company)!}
+                alt=""
+                loading="lazy"
+                onError={(e) => (e.currentTarget.style.display = "none")}
+              />
+            )}
             <h4 className="career-node-title">{item.title}</h4>
             <h5 className="career-node-company">{item.company}</h5>
             <p className="career-node-desc">{item.description}</p>

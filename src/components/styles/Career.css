@@ -147,3 +147,13 @@
     transform: translateX(-7px);
   }
 }
+.career-logo {
+  display: block;
+  height: 2.6rem;
+  max-width: 9rem;
+  object-fit: contain;
+  background: #fff;
+  border: 2px solid var(--ink);
+  padding: 0.2rem 0.4rem;
+  margin-top: 0.6rem;
+}
