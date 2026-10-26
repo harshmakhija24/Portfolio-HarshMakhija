@@ -1,148 +1,123 @@
-import { useEffect, useRef } from "react";
 import "./styles/WhatIDo.css";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+type Pillar = {
+  num: string;
+  title: string;
+  subtitle: string;
+  desc: string;
+  theme: string;
+  link: string;
+  linkText: string;
+  projectIndex?: number;
+  targetId?: string;
+  altBtn: boolean;
+  delay: string;
+};
+
+const pillars: Pillar[] = [
+  {
+    num: "01",
+    title: "GROWTH & OUTREACH",
+    subtitle: "Founder’s Office & Lead Generation",
+    desc: "Building automated outbound engines from scratch. Architected custom LinkedIn scraping pipelines, structured targeted CXO and senior doctor databases, and executed high-conversion outreach for India's largest health-tech collective.",
+    theme: "what-growth",
+    link: "#work",
+    projectIndex: 0,
+    linkText: "Explore Growth Deck",
+    altBtn: false,
+    delay: "0ms",
+  },
+  {
+    num: "02",
+    title: "STORYTELLING & MEDIA",
+    subtitle: "Narrative Direction & Multimedia",
+    desc: "Translating complex visions into compelling narratives that move stakeholders. Directed end-to-end production of 25+ short-form videos, 5+ long-form YouTube productions, institutional podcasts, and investor decks across IIM Bangalore and early ventures.",
+    theme: "what-story",
+    link: "#career",
+    targetId: "career",
+    linkText: "View 30+ Productions",
+    altBtn: true,
+    delay: "80ms",
+  },
+  {
+    num: "03",
+    title: "AI SYSTEMS & PLATFORMS",
+    subtitle: "Applied AI & Digital Infrastructure",
+    desc: "Moving beyond experimentation to deliver production-grade software: autonomous web agents with Google Lighthouse CLI scoring, Groq/Whisper multilingual video pipelines, and full-stack enterprise platform overhauls (Krishitek, IIMBx).",
+    theme: "what-tech",
+    link: "#work",
+    projectIndex: 1,
+    linkText: "Explore Systems & Dashboards",
+    altBtn: false,
+    delay: "140ms",
+  },
+  {
+    num: "04",
+    title: "HIGH-STAKES OPERATIONS",
+    subtitle: "Event Logistics & Institutional Leadership",
+    desc: "Proven execution under high stakes. Managed ₹12Cr+ cumulative event portfolios, spearheaded the HDFC Festive Treat card launch at Clarks Amer, screened 1,000+ candidate applications for IIMB, and led social initiatives touching 10,000+ lives.",
+    theme: "what-ops",
+    link: "#work",
+    projectIndex: 6,
+    linkText: "Explore Events Portfolio",
+    altBtn: true,
+    delay: "200ms",
+  },
+];
 
 const WhatIDo = () => {
-  const containerRef = useRef<(HTMLDivElement | null)[]>([]);
-  const setRef = (el: HTMLDivElement | null, index: number) => {
-    containerRef.current[index] = el;
-  };
-  useEffect(() => {
-    if (ScrollTrigger.isTouch) {
-      containerRef.current.forEach((container) => {
-        if (container) {
-          container.classList.remove("what-noTouch");
-          container.addEventListener("click", () => handleClick(container));
-        }
-      });
+  const handleLinkClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    projectIndex?: number,
+    targetId?: string
+  ) => {
+    if (typeof projectIndex === "number") {
+      e.preventDefault();
+      window.dispatchEvent(
+        new CustomEvent("select-project", { detail: projectIndex })
+      );
+      const el = document.getElementById("work");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    } else if (targetId) {
+      e.preventDefault();
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
     }
-    return () => {
-      containerRef.current.forEach((container) => {
-        if (container) {
-          container.removeEventListener("click", () => handleClick(container));
-        }
-      });
-    };
-  }, []);
-  return (
-    <div className="whatIDO">
-      <div className="what-box">
-        <h2 className="title">
-          W<span className="hat-h2">HAT</span>
-          <div>
-            I<span className="do-h2 accent-tech"> DO</span>
-          </div>
-        </h2>
-      </div>
-      <div className="what-box">
-        <div className="what-box-in">
-          <div className="what-border2">
-            <svg width="100%">
-              <line
-                x1="0"
-                y1="0"
-                x2="0"
-                y2="100%"
-                stroke="white"
-                strokeWidth="2"
-                strokeDasharray="7,7"
-              />
-              <line
-                x1="100%"
-                y1="0"
-                x2="100%"
-                y2="100%"
-                stroke="white"
-                strokeWidth="2"
-                strokeDasharray="7,7"
-              />
-            </svg>
-          </div>
-          <div
-            className="what-content what-noTouch"
-            ref={(el) => setRef(el, 0)}
-          >
-            <div className="what-border1">
-              <svg height="100%">
-                <line
-                  x1="0"
-                  y1="0"
-                  x2="100%"
-                  y2="0"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeDasharray="6,6"
-                />
-                <line
-                  x1="0"
-                  y1="100%"
-                  x2="100%"
-                  y2="100%"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeDasharray="6,6"
-                />
-              </svg>
-            </div>
-            <div className="what-corner"></div>
+  };
 
-            <div className="what-content-in">
-              <h3 className="accent-tech">VIBECODING</h3>
-              <h4>AI-Driven Tech Creation</h4>
-              <p>
-                Leveraging advanced AI tools like Antigravity, Codex, and others to rapidly prototype, build, and deploy tech solutions and dashboards without being a traditional developer.
-              </p>
-              <a href="#work" className="what-link accent-tech">Explore Projects <span>&#8594;</span></a>
-              <div className="what-arrow"></div>
-            </div>
-          </div>
-          <div
-            className="what-content what-noTouch"
-            ref={(el) => setRef(el, 1)}
+  return (
+    <section className="whatIDO section-container" id="what-i-do">
+      <h2 className="section-title" data-reveal>
+        What <em>I Do</em>
+      </h2>
+      <div className="what-grid">
+        {pillars.map((p) => (
+          <article
+            key={p.num}
+            className={`what-card ${p.theme}`}
+            data-reveal
+            style={{ "--d": p.delay } as React.CSSProperties}
           >
-            <div className="what-border1">
-              <svg height="100%">
-                <line
-                  x1="0"
-                  y1="100%"
-                  x2="100%"
-                  y2="100%"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeDasharray="6,6"
-                />
-              </svg>
-            </div>
-            <div className="what-corner"></div>
-            <div className="what-content-in">
-              <h3 className="accent-business">SOCIAL SERVICE</h3>
-              <h4>Community Impact & NGO Leadership</h4>
-              <p>
-                Leading and managing high-impact projects such as the Healing Society and the GMCKS Siksha project, driving meaningful change through structured organizational efforts.
-              </p>
-              <a href="#career" className="what-link accent-business">Explore Experience <span>&#8594;</span></a>
-              <div className="what-arrow"></div>
-            </div>
-          </div>
-        </div>
+            <span className="sticker what-num">{p.num}</span>
+            <h3>{p.title}</h3>
+            <h4>{p.subtitle}</h4>
+            <p>{p.desc}</p>
+            <a
+              href={p.link}
+              onClick={(e) => handleLinkClick(e, p.projectIndex, p.targetId)}
+              className={`btn ${p.altBtn ? "btn-alt" : ""}`}
+            >
+              {p.linkText} <span>&#8594;</span>
+            </a>
+          </article>
+        ))}
       </div>
-    </div>
+    </section>
   );
 };
 
 export default WhatIDo;
-
-function handleClick(container: HTMLDivElement) {
-  container.classList.toggle("what-content-active");
-  container.classList.remove("what-sibling");
-  if (container.parentElement) {
-    const siblings = Array.from(container.parentElement.children);
-
-    siblings.forEach((sibling) => {
-      if (sibling !== container) {
-        sibling.classList.remove("what-content-active");
-        sibling.classList.toggle("what-sibling");
-      }
-    });
-  }
-}

@@ -1,0 +1,144 @@
+@property --ev-n {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 12;
+}
+
+.ev {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--tomato);
+  color: var(--ink);
+  container-type: inline-size;
+  overflow: hidden;
+}
+
+.ev-ribbon {
+  background: var(--ink);
+  color: var(--lime);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(0.6rem, 2.6cqw, 0.85rem);
+  padding: 0.4em 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ev-ribbon-track {
+  display: flex;
+  width: max-content;
+  animation: ev-scroll 28s linear infinite;
+}
+.ev-ribbon-track span {
+  padding-right: 0;
+}
+
+.ev-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4cqw;
+  padding: 3cqw;
+  background-image: radial-gradient(var(--ink) 1.2px, transparent 1.4px);
+  background-size: 14px 14px;
+  background-position: 0 0;
+  background-blend-mode: multiply;
+}
+
+.ev-kicker {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(0.6rem, 2.6cqw, 0.85rem);
+  text-transform: uppercase;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  padding: 0.15em 0.6em;
+  transform: rotate(-2deg);
+}
+
+.ev-stamp {
+  display: flex;
+  align-items: baseline;
+  gap: 0.05em;
+  padding: 0 0.25em;
+  font-family: var(--font-display, inherit);
+  font-weight: 800;
+  line-height: 0.95;
+  font-size: clamp(3rem, 22cqw, 7rem);
+  background: var(--sun);
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  transform: rotate(-3deg);
+}
+.ev-num {
+  counter-reset: n var(--ev-n);
+}
+.ev-num::after {
+  content: counter(n);
+}
+.ev-unit {
+  font-size: 0.45em;
+  margin-left: 0.1em;
+}
+
+.ev-chips {
+  display: flex;
+  gap: 2.4cqw;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.ev-chip {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(0.6rem, 2.8cqw, 0.9rem);
+  text-transform: uppercase;
+  padding: 0.35em 0.8em;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.ev-chip-0 { transform: rotate(-4deg); background: var(--lime); }
+.ev-chip-1 { transform: rotate(2deg); }
+.ev-chip-2 { transform: rotate(-1.5deg); background: var(--cobalt, #2b3bff); color: var(--paper); }
+
+/* plays each time the slide becomes active */
+.carousel-slide:not([aria-hidden="true"]) .ev-num {
+  animation: ev-count 1100ms var(--ease-out) both;
+}
+.carousel-slide:not([aria-hidden="true"]) .ev-stamp {
+  animation: ev-stamp 520ms var(--ease-out) both;
+}
+.carousel-slide:not([aria-hidden="true"]) .ev-chip {
+  animation: ev-pop 420ms var(--ease-out) both;
+}
+.carousel-slide:not([aria-hidden="true"]) .ev-chip-0 { animation-delay: 450ms; }
+.carousel-slide:not([aria-hidden="true"]) .ev-chip-1 { animation-delay: 540ms; }
+.carousel-slide:not([aria-hidden="true"]) .ev-chip-2 { animation-delay: 630ms; }
+
+@keyframes ev-count {
+  from { --ev-n: 0; }
+  to { --ev-n: 12; }
+}
+@keyframes ev-stamp {
+  from { opacity: 0; transform: rotate(-9deg) scale(1.6); }
+  to { opacity: 1; transform: rotate(-3deg) scale(1); }
+}
+@keyframes ev-pop {
+  from { opacity: 0; translate: 0 14px; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes ev-scroll {
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ev-ribbon-track,
+  .ev-num,
+  .ev-stamp,
+  .ev-chip {
+    animation: none !important;
+  }
+}

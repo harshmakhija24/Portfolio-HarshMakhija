@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import Loading from "../components/Loading";
+import Loading, { setProgress } from "../components/Loading";
 
 interface LoadingType {
   isLoading: boolean;
@@ -19,17 +19,20 @@ export const LoadingProvider = ({ children }: PropsWithChildren) => {
   const [isLoading, setIsLoading] = useState(true);
   const [loading, setLoading] = useState(0);
 
-  const value = {
-    isLoading,
-    setIsLoading,
-    setLoading,
-  };
-  useEffect(() => {}, [loading]);
+  useEffect(() => {
+    const progress = setProgress(setLoading);
+    document.fonts.ready.then(() => progress.loaded());
+    return () => progress.clear();
+  }, []);
+
+  const value = { isLoading, setIsLoading, setLoading };
 
   return (
-    <LoadingContext.Provider value={value as LoadingType}>
+    <LoadingContext.Provider value={value}>
       {isLoading && <Loading percent={loading} />}
-      <main className="main-body">{children}</main>
+      <main className={`main-body ${isLoading ? "" : "main-active"}`}>
+        {children}
+      </main>
     </LoadingContext.Provider>
   );
 };

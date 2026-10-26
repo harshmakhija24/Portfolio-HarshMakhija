@@ -1,47 +1,38 @@
-import { PropsWithChildren, useEffect, useState } from "react";
+import { useEffect } from "react";
 import About from "./About";
 import Career from "./Career";
 import Contact from "./Contact";
-
 import Landing from "./Landing";
 import Navbar from "./Navbar";
-import SocialIcons from "./SocialIcons";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
-import setSplitText from "./utils/splitText";
 
-
-const MainContainer = ({ children }: PropsWithChildren) => {
-  const [isDesktopView, setIsDesktopView] = useState<boolean>(
-    window.innerWidth > 1024
-  );
-
+const MainContainer = () => {
+  // one observer reveals every [data-reveal] element once as it scrolls into view
   useEffect(() => {
-    const resizeHandler = () => {
-      setSplitText();
-      setIsDesktopView(window.innerWidth > 1024);
-    };
-    resizeHandler();
-    window.addEventListener("resize", resizeHandler);
-    return () => {
-      window.removeEventListener("resize", resizeHandler);
-    };
-  }, [isDesktopView]);
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        }),
+      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
+    );
+    document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
 
   return (
     <div className="container-main">
-
       <Navbar />
-      <SocialIcons />
-      {isDesktopView && children}
-      <div className="container-main">
-        <Landing>{!isDesktopView && children}</Landing>
-        <About />
-        <WhatIDo />
-        <Career />
-        <Work />
-        <Contact />
-      </div>
+      <Landing />
+      <About />
+      <WhatIDo />
+      <Career />
+      <Work />
+      <Contact />
     </div>
   );
 };

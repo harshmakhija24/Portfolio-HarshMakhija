@@ -1,116 +1,122 @@
 .contact-section {
-  margin: auto;
-  padding-bottom: 100px;
-  margin-top: 100px;
-  position: relative;
-  z-index: 2;
-  background-color: var(--backgroundColor);
+  margin-top: clamp(4rem, 9vw, 8rem);
+  padding: clamp(3rem, 6vw, 5rem) 0 2.5rem;
+  background: var(--ink);
+  color: var(--paper);
+  border-top: var(--stroke);
 }
 
-.contact-section h3 {
-  font-size: 60px;
-  font-weight: 400;
+.contact-title {
+  font-size: clamp(4rem, 17vw, 14rem);
+  font-weight: 800;
   text-transform: uppercase;
-  margin: 0;
+  letter-spacing: -0.06em;
+  line-height: 0.8;
+  color: var(--lime);
+  margin-bottom: 2.5rem;
 }
 
 .contact-flex {
-  display: flex;
-  justify-content: space-between;
-}
-
-.contact-flex h4 {
-  font-weight: 500;
-  margin: 0;
-  opacity: 0.6;
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
 }
 
 .contact-box {
   display: flex;
   flex-direction: column;
+  gap: 0.6rem;
+  align-items: flex-start;
 }
 
-.contact-flex p {
-  margin-top: 10px;
-  margin-bottom: 20px;
+.contact-box h4 {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--sun);
+  padding: 0.15rem 0.6rem;
+  margin-top: 0.8rem;
+  transform: rotate(-2deg);
 }
 
-a.contact-social {
-  font-size: 25px;
-  border-bottom: 1px solid #ccc;
+.contact-box h4:first-child {
+  margin-top: 0;
+}
+
+.contact-box p,
+.contact-box p a {
+  font-size: 1.05rem;
+}
+
+.contact-box p a {
+  background-image: linear-gradient(var(--lime), var(--lime));
+  background-size: 0 3px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 250ms var(--ease-out), color 150ms ease;
+}
+
+.contact-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  padding: 0.2rem 0.9rem;
+  border: 2.5px solid var(--paper);
+  border-radius: 4px;
+  box-shadow: 4px 4px 0 var(--tomato);
+  transition: transform 160ms var(--ease-out), box-shadow 160ms var(--ease-out),
+    background-color 150ms ease, color 150ms ease;
+}
+
+.contact-social:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--tomato);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .contact-box p a:hover {
+    background-size: 100% 3px;
+    color: var(--lime);
+  }
+  .contact-social:hover {
+    background: var(--lime);
+    color: var(--ink);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--tomato);
+  }
+  .contact-social:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0 0 0 var(--tomato);
+  }
 }
 
 .contact-box h2 {
-  font-weight: 400;
-  font-size: 23px;
-  margin: 0;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.1;
 }
 
-.contact-box h2>span {
-  color: var(--accentColor);
+.contact-box h2 span {
+  color: var(--tomato);
 }
 
 .contact-box h5 {
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 20px;
   display: flex;
-  gap: 10px;
-  opacity: 0.5;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0;
 }
 
-@media only screen and (max-width: 1600px) {
-  .contact-section h3 {
-    font-size: 50px;
-  }
-
-  .contact-box h2 {
-    font-size: 20px;
-  }
-
-  a.contact-social {
-    font-size: 22px;
-  }
-}
-
-@media only screen and (max-width: 1300px) {
-  .contact-section h3 {
-    font-size: 40px;
-  }
-
-  .contact-box h2 {
-    font-size: 18px;
-  }
-
-  a.contact-social {
-    font-size: 20px;
-  }
-
-  .contact-flex p {
-    margin-top: 0px;
-  }
-}
-
-@media only screen and (max-width: 900px) {
+@media (max-width: 900px) {
   .contact-flex {
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .contact-flex p {
-    margin-bottom: 0px;
-  }
-
-  .contact-flex h4 {
-    margin-top: 20px;
-  }
-
-  .contact-section {
-    margin-top: 50px;
-    padding-bottom: 50px;
-  }
-
-  .contact-container {
-    width: calc(100% - 25px);
+    grid-template-columns: 1fr;
   }
 }

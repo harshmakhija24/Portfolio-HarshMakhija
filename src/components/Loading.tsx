@@ -2,121 +2,74 @@ import { useEffect, useState } from "react";
 import "./styles/Loading.css";
 import { useLoading } from "../context/LoadingProvider";
 
-import Marquee from "react-fast-marquee";
+const words = [
+  "Founder's Office",
+  "Growth & Outreach",
+  "IIM Bangalore",
+  "Storytelling & Systems",
+];
 
 const Loading = ({ percent }: { percent: number }) => {
   const { setIsLoading } = useLoading();
-  const [loaded, setLoaded] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [clicked, setClicked] = useState(false);
+  const [leaving, setLeaving] = useState(false);
 
   useEffect(() => {
-    if (percent >= 100 && !loaded) {
-      setTimeout(() => {
-        setLoaded(true);
-        setTimeout(() => {
-          setIsLoaded(true);
-        }, 400);
-      }, 200);
-    }
-  }, [percent, loaded]);
-
-  useEffect(() => {
-    import("./utils/initialFX").then((module) => {
-      if (isLoaded) {
-        setClicked(true);
-        setTimeout(() => {
-          if (module.initialFX) {
-            module.initialFX();
-          }
-          setIsLoading(false);
-        }, 300);
-      }
-    });
-  }, [isLoaded]);
-
-  function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
-    const { currentTarget: target } = e;
-    const rect = target.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    target.style.setProperty("--mouse-x", `${x}px`);
-    target.style.setProperty("--mouse-y", `${y}px`);
-  }
+    if (percent < 100) return;
+    const t1 = setTimeout(() => setLeaving(true), 250);
+    const t2 = setTimeout(() => setIsLoading(false), 250 + 600);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [percent, setIsLoading]);
 
   return (
-    <>
-      <div className="loading-header">
-        <a href="/#" className="loader-title" data-cursor="disable">
-          AM
-        </a>
-        <div className={`loaderGame ${clicked && "loader-out"}`}>
-          <div className="loaderGame-container">
-            <div className="loaderGame-in">
-              {[...Array(27)].map((_, index) => (
-                <div className="loaderGame-line" key={index}></div>
-              ))}
-            </div>
-            <div className="loaderGame-ball"></div>
-          </div>
+    <div className={`loader ${leaving ? "loader-out" : ""}`} role="status">
+      <div className="loader-ribbon" aria-hidden="true">
+        <div className="loader-ribbon-track">
+          {[...words, ...words, ...words, ...words].map((w, i) => (
+            <span key={i}>{w} ✱</span>
+          ))}
         </div>
       </div>
-      <div className="loading-screen">
-        <div className="loading-marquee">
-          <Marquee>
-            <span> Full Stack Developer</span> <span>Software Engineer</span>
-            <span> Full Stack Developer</span> <span>Software Engineer</span>
-          </Marquee>
+      <div className="loader-core">
+        <span className="sticker loader-tag">HM · Portfolio</span>
+        <div className="loader-percent">
+          {Math.min(percent, 100)}
+          <small>%</small>
         </div>
-        <div
-          className={`loading-wrap ${clicked && "loading-clicked"}`}
-          onMouseMove={(e) => handleMouseMove(e)}
-        >
-          <div className="loading-hover"></div>
-          <div className={`loading-button ${loaded && "loading-complete"}`}>
-            <div className="loading-container">
-              <div className="loading-content">
-                <div className="loading-content-in">
-                  Loading <span>{percent}%</span>
-                </div>
-              </div>
-              <div className="loading-box"></div>
-            </div>
-            <div className="loading-content2">
-              <span>Welcome</span>
-            </div>
-          </div>
+        <div className="loader-bar" aria-hidden="true">
+          <div
+            className="loader-bar-fill"
+            style={{ transform: `scaleX(${Math.min(percent, 100) / 100})` }}
+          />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
 export default Loading;
 
 export const setProgress = (setLoading: (value: number) => void) => {
-  let percent: number = 0;
+  let percent = 0;
 
   let interval = setInterval(() => {
     if (percent <= 80) {
-      let rand = Math.round(Math.random() * 5);
-      percent = percent + rand;
+      percent += Math.round(Math.random() * 5);
       setLoading(percent);
     } else {
       clearInterval(interval);
       interval = setInterval(() => {
-        percent = percent + 1;
+        percent += 1;
         setLoading(percent);
-        if (percent > 98) {
-          clearInterval(interval);
-        }
+        if (percent > 98) clearInterval(interval);
       }, 50);
     }
   }, 40);
 
   function clear() {
     clearInterval(interval);
-    setLoading(100);
   }
 
   function loaded() {
@@ -130,7 +83,7 @@ export const setProgress = (setLoading: (value: number) => void) => {
           resolve(percent);
           clearInterval(interval);
         }
-      }, 2);
+      }, 6);
     });
   }
   return { loaded, percent, clear };
