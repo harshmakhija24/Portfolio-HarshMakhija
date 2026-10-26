@@ -39,8 +39,23 @@
 }
 
 .what-tech {
+  background: var(--ink);
+  color: var(--paper);
+  background-image: linear-gradient(rgba(197, 244, 80, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(197, 244, 80, 0.12) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+.what-tech h3 {
+  color: var(--lime);
+}
+.what-tech h4 {
+  color: var(--sun);
+}
+.what-tech .btn {
   background: var(--lime);
   color: var(--ink);
+  border-color: var(--lime);
+  box-shadow: 4px 4px 0 var(--tomato);
 }
 
 .what-ops {
